@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section Css{
+    <link rel="stylesheet" href="~/css/example.css" asp-append-version="true" />
+    <style>
+        h1{
+            color:magenta;
+            background-color: blue;
+        }
+    </style>
+}
+
+@section Scripts{
+    <script type="text/javascript">
+    $(document).ready(function(){
+        console.log("sayfaya hoşgeldiniz")
+    })
+    </script>
+}
+
+<h1>Merhaba Dünya</h1>
+<hr />
+<h2>Merhaba Asp.Net</h2>
+
+@*<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<partial name="_MenuPartialView"></partial>
+@await Html.PartialAsync("_MenuPartialView")*@
+

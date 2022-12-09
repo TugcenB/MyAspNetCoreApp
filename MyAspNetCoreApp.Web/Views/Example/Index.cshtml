@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "ExampleController Index Page";
+    Layout = "ExampleLayout";
+}
+@section header{
+    
+
+    <div>
+        @DateTime.Now.ToShortDateString()
+    </div>
+
+    @{
+        var datetime = DateTime.Now.ToShortDateString();
+        @: bugünün tarihi: @datetime
+
+    }
+
+    @if (DateTime.IsLeapYear(DateTime.Now.Year))
+    {
+        <p>artık yıl</p>
+    }
+    else
+    {
+        <p>normal yıl</p>
+    }
+
+    @foreach (var item in Enumerable.Range(1, 10).ToList())
+    {
+        <p>@item</p>
+    }
+
+}
+<div>Bu sayfa ExampleController >Index Sayfası</div>
