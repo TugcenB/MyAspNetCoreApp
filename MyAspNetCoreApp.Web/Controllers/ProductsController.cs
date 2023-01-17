@@ -13,17 +13,17 @@ namespace MyAspNetCoreApp.Web.Controllers
         {
             _productRepository = new ProductRepository();
 
-           _context= context;
+            _context = context;
 
-            if(!_context.Products.Any())
+            if (!_context.Products.Any())
             {
-                _context.Products.Add(new Product() { Name = "Kalem 1", Stock = 10, Price = 100 });
-                _context.Products.Add(new Product() { Name = "Kalem 2", Stock = 10, Price = 200 });
-                _context.Products.Add(new Product() { Name = "Kalem 3", Stock = 10, Price = 300 });
+                _context.Products.Add(new Product() { Name = "Kalem 1", Stock = 10, Price = 100, Color = "Red", Width = 10, Height = 20 });
+                _context.Products.Add(new Product() { Name = "Kalem 2", Stock = 10, Price = 200, Color = "White", Width = 10, Height = 20 });
+                _context.Products.Add(new Product() { Name = "Kalem 3", Stock = 10, Price = 300, Color = "Red", Width = 10, Height = 20 });
 
                 _context.SaveChanges();
             }
-            
+
 
         }
 
@@ -36,7 +36,7 @@ namespace MyAspNetCoreApp.Web.Controllers
 
         public IActionResult Remove(int id)
         {
-            var product= _context.Products.Find(id);
+            var product = _context.Products.Find(id);
 
             _context.Products.Remove(product);
             _context.SaveChanges();
