@@ -50,7 +50,7 @@ namespace MyAspNetCoreApp.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(string Name,decimal Price,int Stock,string Color)
+        public IActionResult Add(Product newProduct)
         {
             //Method 1
             //var name = HttpContext.Request.Form["Name"].ToString();
@@ -59,7 +59,7 @@ namespace MyAspNetCoreApp.Web.Controllers
             //var color= HttpContext.Request.Form["Color"].ToString();
             
             //Request Header-Body
-            Product newProduct = new Product(){Name=Name,Color=Color,Stock=Stock,Price=Price };
+            //Product newProduct = new Product(){Name=Name,Color=Color,Stock=Stock,Price=Price };
             _context.Products.Add(newProduct);
             _context.SaveChanges();
             return RedirectToAction("Index");
