@@ -29,10 +29,6 @@ namespace MyAspNetCoreApp.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Barcode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
 
@@ -47,7 +43,7 @@ namespace MyAspNetCoreApp.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 #pragma warning restore 612, 618
         }
