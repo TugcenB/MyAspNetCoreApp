@@ -4,4 +4,18 @@
 }
 
 <h1>Add Product</h1>
-
+<form asp-controller="Products" asp-action="SaveProduct" method="post">
+    <label>Product Name</label>
+    <input type="text" name="Name" />
+    <br />
+    <label>Product Price</label>
+    <input type="text" name="Price" />
+    <br />
+    <label>Stock</label>
+    <input type="text" name="Stock" />
+    <br />
+    <label>Color</label>
+    <input type="text" name="Color" />
+    <br />
+    <button type="submit">Save</button>
+</form>
