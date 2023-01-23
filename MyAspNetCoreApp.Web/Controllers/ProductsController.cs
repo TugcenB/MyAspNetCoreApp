@@ -49,20 +49,22 @@ namespace MyAspNetCoreApp.Web.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Add(Product newProduct)
+        [HttpGet]
+        public IActionResult SaveProduct(Product newProduct)
         {
+            //Request Header-Body
+
             //Method 1
             //var name = HttpContext.Request.Form["Name"].ToString();
             //var price = decimal.Parse(HttpContext.Request.Form["Price"].ToString());
             //var stock = int.Parse(HttpContext.Request.Form["Stock"].ToString());
             //var color= HttpContext.Request.Form["Color"].ToString();
-            
-            //Request Header-Body
+
+            //Method 2
             //Product newProduct = new Product(){Name=Name,Color=Color,Stock=Stock,Price=Price };
             _context.Products.Add(newProduct);
             _context.SaveChanges();
-            return RedirectToAction("Index");
+            return View("SaveProduct");
         }
         public IActionResult Update(int id)
         {
