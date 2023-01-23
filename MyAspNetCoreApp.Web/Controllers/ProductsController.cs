@@ -49,8 +49,8 @@ namespace MyAspNetCoreApp.Web.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult SaveProduct(Product newProduct)
+        [HttpPost]
+        public IActionResult Add(Product newProduct)
         {
             //Request Header-Body
 
@@ -64,7 +64,7 @@ namespace MyAspNetCoreApp.Web.Controllers
             //Product newProduct = new Product(){Name=Name,Color=Color,Stock=Stock,Price=Price };
             _context.Products.Add(newProduct);
             _context.SaveChanges();
-            return View("SaveProduct");
+            return RedirectToAction("Index");
         }
         public IActionResult Update(int id)
         {
