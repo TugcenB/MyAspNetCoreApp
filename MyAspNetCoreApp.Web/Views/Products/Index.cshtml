@@ -5,6 +5,12 @@
 @model List<Product>
 
 <h1>Products</h1>
+@if (TempData["status"] != null)
+{
+    <div class="alert alert-light" role="alert">
+        @TempData["status"]
+    </div>
+}
 
 <a asp-controller="products" asp-action="add">Add Product</a>
 

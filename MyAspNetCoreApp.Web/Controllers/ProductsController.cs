@@ -64,6 +64,8 @@ namespace MyAspNetCoreApp.Web.Controllers
             //Product newProduct = new Product(){Name=Name,Color=Color,Stock=Stock,Price=Price };
             _context.Products.Add(newProduct);
             _context.SaveChanges();
+
+            TempData["status"] = "Added successfully!";
             return RedirectToAction("Index");
         }
 
@@ -79,6 +81,8 @@ namespace MyAspNetCoreApp.Web.Controllers
         {
             _context.Products.Update(updateProduct);
             _context.SaveChanges();
+
+            TempData["status"] = "Updated successfully!";
             return RedirectToAction("Index");
         }
 
