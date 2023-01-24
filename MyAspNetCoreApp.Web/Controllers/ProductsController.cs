@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyAspNetCoreApp.Web.Helpers;
 using MyAspNetCoreApp.Web.Models;
 
 namespace MyAspNetCoreApp.Web.Controllers
@@ -8,11 +9,12 @@ namespace MyAspNetCoreApp.Web.Controllers
 
         private AppDbContext _context;
         private readonly ProductRepository _productRepository;
+        private IHelper _helper;
 
-        public ProductsController(AppDbContext context)
+        public ProductsController(AppDbContext context,IHelper helper)
         {
             _productRepository = new ProductRepository();
-
+            _helper = helper;
             _context = context;
 
             if (!_context.Products.Any())
