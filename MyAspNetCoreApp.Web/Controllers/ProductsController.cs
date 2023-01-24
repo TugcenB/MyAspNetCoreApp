@@ -29,8 +29,13 @@ namespace MyAspNetCoreApp.Web.Controllers
 
         }
 
-        public IActionResult Index()
+        public IActionResult Index([FromServices]IHelper helper2)
         {
+            var text = "Asp.Net";
+            var upper = _helper.Upper(text);
+
+            var status = _helper.Equals(helper2);
+
             var products = _context.Products.ToList();
 
             return View(products);
