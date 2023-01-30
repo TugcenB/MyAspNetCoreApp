@@ -9,12 +9,11 @@ namespace MyAspNetCoreApp.Web.Controllers
 
         private AppDbContext _context;
         private readonly ProductRepository _productRepository;
-        private IHelper _helper;
+       
 
-        public ProductsController(AppDbContext context,IHelper helper)
+        public ProductsController(AppDbContext context)
         {
             _productRepository = new ProductRepository();
-            _helper = helper;
             _context = context;
 
             if (!_context.Products.Any())
@@ -29,12 +28,8 @@ namespace MyAspNetCoreApp.Web.Controllers
 
         }
 
-        public IActionResult Index([FromServices]IHelper helper2)
+        public IActionResult Index()
         {
-            var text = "Asp.Net";
-            var upper = _helper.Upper(text);
-
-            var status = _helper.Equals(helper2);
 
             var products = _context.Products.ToList();
 
@@ -51,8 +46,11 @@ namespace MyAspNetCoreApp.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
         public IActionResult Add()
         {
+            ViewBag.Expire = new List<string>() { "1.Ay", "3.Ay","6.Ay","12.Ay" };
+
             return View();
         }
 
