@@ -22,6 +22,8 @@
             <th>Price</th>
             <th>Stock</th>
             <th>Color</th>
+            <th>IsPublish</th>
+            <th>Expire(Month)</th>
             <th>Operation</th>
         </tr>
     </thead>
@@ -34,6 +36,16 @@
                 <td>@item.Price</td>
                 <td>@item.Stock</td>
                 <td>@item.Color</td>
+                <td>
+                    @(@item.IsPublish ? "Yes":"No")
+                    @*@if(@item.IsPublish){
+                        <text>Yes</text>
+                    }
+                    else{
+                        <text>No</text>
+                    }*@
+                    </td>
+                <td>@item.Expire</td>
                 <td>
                     <a asp-controller="products" asp-action="remove" asp-route-id="@item.Id">Remove</a>
                     <a asp-controller="products" asp-action="update" asp-route-id="@item.Id">Update</a>
