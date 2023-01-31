@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
 @model List<Product>
@@ -38,18 +37,21 @@
                 <td>@item.Stock</td>
                 <td>@item.Color</td>
                 <td>
-                    @(@item.IsPublish ? "Yes":"No")
+                    @(@item.IsPublish ? "Yes" : "No")
                     @*@if(@item.IsPublish){
-                        <text>Yes</text>
-                    }
-                    else{
-                        <text>No</text>
-                    }*@
-                    </td>
+                <text>Yes</text>
+                }
+                else{
+                <text>No</text>
+                }*@
+                </td>
                 <td>@item.Expire</td>
-                <td>@if (@item.Description.Length > 20)
+                <td>
+                    @if (@item.Description.Length > 20)
                     {
-                        @item.Description.Substring(0,20)<text> ...</text>
+                        @item.Description.Substring(0,20)
+
+                        <text> ...</text>
                     }
                     else
                     {
@@ -59,7 +61,7 @@
                 <td>
                     <a asp-controller="products" asp-action="remove" asp-route-id="@item.Id">Remove</a>
                     <a asp-controller="products" asp-action="update" asp-route-id="@item.Id">Update</a>
-                    </td>
+                </td>
             </tr>
         }
     </tbody>

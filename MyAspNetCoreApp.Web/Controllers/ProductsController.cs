@@ -10,7 +10,7 @@ namespace MyAspNetCoreApp.Web.Controllers
 
         private AppDbContext _context;
         private readonly ProductRepository _productRepository;
-       
+
 
         public ProductsController(AppDbContext context)
         {
@@ -51,7 +51,7 @@ namespace MyAspNetCoreApp.Web.Controllers
         public IActionResult Add()
         {
             ViewBag.Expire = new Dictionary<string, int>()
-            { 
+            {
                 {"1 Ay",1},
                 {"3 Ay",3},
                 {"6 Ay",6},
@@ -62,8 +62,8 @@ namespace MyAspNetCoreApp.Web.Controllers
                 new(){Data="Blue",Value="Blue"},
                 new(){Data="Green",Value="Green"},
                 new(){Data="Red",Value="Red"}
-            },"Value","Data");
-            
+            }, "Value", "Data");
+
 
             return View();
         }
@@ -86,9 +86,9 @@ namespace MyAspNetCoreApp.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(Product updateProduct,int productId)
+        public IActionResult Update(Product updateProduct, int productId)
         {
-            updateProduct.Id= productId;
+            updateProduct.Id = productId;
             _context.Products.Update(updateProduct);
             _context.SaveChanges();
 
