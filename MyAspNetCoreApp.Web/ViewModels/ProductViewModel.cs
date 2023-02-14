@@ -11,6 +11,7 @@ namespace MyAspNetCoreApp.Web.ViewModels
         [Required(ErrorMessage = "Price alanı boş olamaz")]
         public decimal? Price { get; set; }
         [Required(ErrorMessage = "Stok alanı boş olamaz")]
+        [Range(1,200,ErrorMessage="Stok alanı 1-200 aralığında olmalıdır.")]
         public int? Stock { get; set; }
         public string Description { get; set; }
         [Required(ErrorMessage = "PublishDate alanı boş olamaz")]
