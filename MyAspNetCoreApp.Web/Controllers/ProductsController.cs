@@ -50,8 +50,8 @@ namespace MyAspNetCoreApp.Web.Controllers
 
         [HttpGet]
         public IActionResult Add()
-        {
-            ViewBag.Expire = new Dictionary<string, int>()
+        { 
+                ViewBag.Expire = new Dictionary<string, int>()
             {
                 {"1 Ay",1},
                 {"3 Ay",3},
@@ -59,24 +59,47 @@ namespace MyAspNetCoreApp.Web.Controllers
                 {"12 Ay",12}
             };
 
-            ViewBag.ColorSelect = new SelectList(new List<ColorSelectList> {
+                ViewBag.ColorSelect = new SelectList(new List<ColorSelectList> {
                 new(){Data="Blue",Value="Blue"},
                 new(){Data="Green",Value="Green"},
                 new(){Data="Red",Value="Red"}
             }, "Value", "Data");
+            
+
 
 
             return View();
         }
 
         [HttpPost]
-        public IActionResult Add(Product newProduct)
+        public IActionResult Add(ProductViewModel newProduct)
         {
-            _context.Products.Add(newProduct);
-            _context.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                _context.Products.Add(_mapper.Map<Product>(newProduct));
+                _context.SaveChanges();
 
-            TempData["status"] = "Added successfully!";
-            return RedirectToAction("Index");
+                TempData["status"] = "Added successfully!";
+                return RedirectToAction("Index");
+            }
+
+            else
+            {
+                ViewBag.Expire = new Dictionary<string, int>()
+            {
+                {"1 Ay",1},
+                {"3 Ay",3},
+                {"6 Ay",6},
+                {"12 Ay",12}
+            };
+
+                ViewBag.ColorSelect = new SelectList(new List<ColorSelectList> {
+                new(){Data="Blue",Value="Blue"},
+                new(){Data="Green",Value="Green"},
+                new(){Data="Red",Value="Red"}
+            }, "Value", "Data");
+                return View();
+            }
         }
 
         [HttpGet]
@@ -97,9 +120,9 @@ namespace MyAspNetCoreApp.Web.Controllers
                 new(){Data="Blue",Value="Blue"},
                 new(){Data="Green",Value="Green"},
                 new(){Data="Red",Value="Red"}
-            }, "Value", "Data",product.Color);
+            }, "Value", "Data", product.Color);
 
-            
+
             return View(product);
         }
 
