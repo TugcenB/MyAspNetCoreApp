@@ -14,10 +14,12 @@
     </div>
     <div class="mb-3">
         <label asp-for="Price" class="form-label">Product Price</label>
+        <span class="text-danger" asp-validation-for="Price"></span>
         <input class="form-control" asp-for="Price">
     </div>
     <div class="mb-3">
         <label asp-for="Stock" class="form-label">Product Stock</label>
+        <span class="text-danger" asp-validation-for="Stock"></span>
         <input type="text" class="form-control" asp-for="Stock">
     </div>
     <div class="mb-3">

@@ -6,10 +6,12 @@ namespace MyAspNetCoreApp.Web.ViewModels
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="İsim alanı boş olamaz")]
         public string? Name { get; set; }
-        public decimal Price { get; set; }
-        public int Stock { get; set; }
+        [Required(ErrorMessage = "Price alanı boş olamaz")]
+        public decimal? Price { get; set; }
+        [Required(ErrorMessage = "Stok alanı boş olamaz")]
+        public int? Stock { get; set; }
         public string Description { get; set; }
         public DateTime? PublishDate { get; set; }
         public string? Color { get; set; }
