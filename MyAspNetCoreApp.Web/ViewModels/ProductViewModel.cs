@@ -7,6 +7,7 @@ namespace MyAspNetCoreApp.Web.ViewModels
         public int Id { get; set; }
 
         [Required(ErrorMessage ="İsim alanı boş olamaz")]
+        [StringLength(50,MinimumLength =10,ErrorMessage ="Karakter uzunluğu 10-50 aralığında olmalıdır.")]
         public string? Name { get; set; }
         [Required(ErrorMessage = "Price alanı boş olamaz")]
         public decimal? Price { get; set; }
