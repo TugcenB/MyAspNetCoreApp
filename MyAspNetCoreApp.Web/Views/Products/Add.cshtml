@@ -64,6 +64,11 @@
         <span class="text-danger" asp-validation-for="PublishDate"></span>
         <input class="form-control" asp-for="PublishDate">
     </div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">Email Address</label>
+        <span class="text-danger" asp-validation-for="Email"></span>
+        <input type="text" class="form-control" asp-for="Email">
+    </div>
 
     <button class="btn btn-primary" type="submit">Save</button>
 </form>
