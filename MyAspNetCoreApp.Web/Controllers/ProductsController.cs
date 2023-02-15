@@ -99,7 +99,7 @@ namespace MyAspNetCoreApp.Web.Controllers
             {
                 try
                 {
-                    throw new Exception("db hatası");
+                   
                     _context.Products.Add(_mapper.Map<Product>(newProduct));
                     _context.SaveChanges();
 
