@@ -90,10 +90,10 @@ namespace MyAspNetCoreApp.Web.Controllers
             }, "Value", "Data");
                 
 
-            if (string.IsNullOrEmpty(newProduct.Name) && newProduct.Name.StartsWith("A"))
-            {
-                ModelState.AddModelError(string.Empty,"Ürün A harfi ile başlayamaz!");
-            }
+            //if (string.IsNullOrEmpty(newProduct.Name) && newProduct.Name.StartsWith("A"))
+            //{
+            //    ModelState.AddModelError(string.Empty,"Ürün A harfi ile başlayamaz!");
+            //}
 
             if (ModelState.IsValid)
             {
@@ -157,5 +157,20 @@ namespace MyAspNetCoreApp.Web.Controllers
             return RedirectToAction("Index");
         }
 
+
+        [AcceptVerbs("GET","POST")]
+        public IActionResult HasProductName(string Name) 
+        {
+            var anyProducts = _context.Products.Any(x => x.Name.ToLower() == Name.ToLower());
+
+            if (anyProducts)
+            {
+                return Json("Kaydetmeye çalıştığınız ürün veri tabanında bulunmaktadır.");
+            }
+            else
+            {
+                return Json(true);
+            }
+        }
     }
 }
