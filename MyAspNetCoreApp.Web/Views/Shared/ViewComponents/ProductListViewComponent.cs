@@ -13,7 +13,7 @@ namespace MyAspNetCoreApp.Web.Views.Shared.ViewComponents
             _context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(int type=1)
         {
             var viewmodels = _context.Products.Select(x=> new
             ProductListComponentViewModel
@@ -22,7 +22,15 @@ namespace MyAspNetCoreApp.Web.Views.Shared.ViewComponents
                 Description= x.Description
             }).ToList();
 
-            return View(viewmodels);
+            
+            if (type == 1)
+            {
+                return View("Default",viewmodels);
+            }
+            else
+            {
+                return View("Type2", viewmodels);
+            }
         }
     }
 }
