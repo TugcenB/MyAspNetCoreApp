@@ -2,33 +2,39 @@
     ViewData["Title"] = "Update";
 }
 
-@model Product
+@model ProductViewModel
 
 <h1>Update Product</h1>
 <form asp-controller="Products" asp-action="Update" asp-route-productId="@Model.Id" method="post">
 
+    <input type="hidden" asp-for="Id" />
     <div class="mb-3">
         <label asp-for="Name" class="form-label">Product Name</label>
+        <span class="text-danger" asp-validation-for="Name"></span>
         <input class="form-control" asp-for="Name">
     </div>
     <div class="mb-3">
         <label asp-for="Price" class="form-label">Product Price</label>
+        <span class="text-danger" asp-validation-for="Price"></span>
         <input class="form-control" asp-for="Price">
     </div>
     <div class="mb-3">
         <label asp-for="Stock" class="form-label">Product Stock</label>
+        <span class="text-danger" asp-validation-for="Stock"></span>
         <input type="text" class="form-control" asp-for="Stock">
     </div>
     <div class="mb-3">
         @*<label asp-for="Color" class="form-label">Product Color</label>
         <input class="form-control" asp-for="Color">*@
-
+        <span class="text-danger" asp-validation-for="Color"></span>
         <select class="form-select" asp-for="Color" asp-items="ViewBag.ColorSelect">
             <option value="">Choose Color</option>
+
         </select>
     </div>
     <div class="form-check">
         <input class="form-check-input" asp-for="IsPublish">
+
         <label class="form-check-label" asp-for="IsPublish">
             Yayınlansın mı?
         </label>
@@ -36,16 +42,11 @@
 
     <div class="mb-3 mt-3">
         <span>Ürünün satışta kalma süresi</span>
+        <span class="text-danger" asp-validation-for="Expire"></span>
         @foreach (var item in ViewBag.Expire as Dictionary<string, int>)
         {
             <div class="form-check">
-                @*@if(item.Value==ViewBag.ExpireValue){
-                <input checked="checked" class="form-check-input" type="radio" id="@(item.Value)Expire" asp-for="Expire" value="@item.Value">
-                }
-                else{
                 <input class="form-check-input" type="radio" id="@(item.Value)Expire" asp-for="Expire" value="@item.Value">
-                }*@
-                <input  checked=@(item.Value==ViewBag.ExpireValue ? true:false) class="form-check-input" type="radio" id="@(item.Value)Expire" asp-for="Expire" value="@item.Value">
 
                 <label class="form-check-label" asp-for="Expire" for="@(item.Value)Expire">
                     @item.Key
@@ -61,8 +62,15 @@
 
     <div class="mb-3">
         <label asp-for="PublishDate" class="form-label">Product Publish Date:</label>
+        <span class="text-danger" asp-validation-for="PublishDate"></span>
         <input class="form-control" asp-for="PublishDate">
     </div>
 
     <button class="btn btn-primary" type="submit">Update</button>
 </form>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}

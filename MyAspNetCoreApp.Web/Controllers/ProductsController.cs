@@ -143,14 +143,34 @@ namespace MyAspNetCoreApp.Web.Controllers
             }, "Value", "Data", product.Color);
 
 
-            return View(product);
+            return View(_mapper.Map<ProductViewModel>(product));
         }
 
         [HttpPost]
-        public IActionResult Update(Product updateProduct, int productId)
+        public IActionResult Update(ProductViewModel updateProduct)
         {
-            updateProduct.Id = productId;
-            _context.Products.Update(updateProduct);
+ 
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ExpireValue = updateProduct.Expire;
+                ViewBag.Expire = new Dictionary<string, int>()
+            {
+                {"1 Ay",1},
+                {"3 Ay",3},
+                {"6 Ay",6},
+                {"12 Ay",12}
+            };
+
+                ViewBag.ColorSelect = new SelectList(new List<ColorSelectList> {
+                new(){Data="Blue",Value="Blue"},
+                new(){Data="Green",Value="Green"},
+                new(){Data="Red",Value="Red"}
+            }, "Value", "Data", updateProduct.Color);
+
+                return View();
+            }
+            
+            _context.Products.Update(_mapper.Map<Product>(updateProduct));
             _context.SaveChanges();
 
             TempData["status"] = "Updated successfully!";
