@@ -1,6 +1,12 @@
 ﻿@model VisitorViewModel
 
-<form asp-controller="HomeController" asp-action="Visitor" method="post">
+
+@if (TempData["result"] != null)
+{
+    <div class="alert alert-info">@TempData["result"]</div>
+}
+
+<form asp-controller="Home" asp-action="SaveVisitorComment" method="post">
     <div class="mb-3">
         <label asp-for="Name" class="form-label">Name</label>
         <input class="form-control" asp-for="Name">
