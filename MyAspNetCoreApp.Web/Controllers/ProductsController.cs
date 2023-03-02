@@ -41,10 +41,12 @@ namespace MyAspNetCoreApp.Web.Controllers
 
         public IActionResult Pages(int page,int pageSize)
         {
+            var products = _context.Products.Skip((page-1)*pageSize).Take(pageSize).ToList();
+            
             ViewBag.page = page;
             ViewBag.pageSize = pageSize;
 
-            return View();
+            return View(_mapper.Map<List<ProductViewModel>>(products));
         }
 
         public IActionResult GetById(int productId)
