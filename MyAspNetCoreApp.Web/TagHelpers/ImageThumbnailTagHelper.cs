@@ -2,7 +2,7 @@
 
 namespace MyAspNetCoreApp.Web.TagHelpers
 {
-    public class ImageThumbnail : TagHelper
+    public class ImageThumbnailTagHelper : TagHelper
     {
         public string ImageSrc { get; set; }
 
