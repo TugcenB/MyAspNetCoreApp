@@ -34,6 +34,8 @@ namespace MyAspNetCoreApp.Web.Controllers
             _mapper = mapper;
         }
 
+
+        [CacheResourceFilter]
         public IActionResult Index()
         {
 
