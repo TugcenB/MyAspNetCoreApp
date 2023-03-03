@@ -22,7 +22,7 @@ namespace MyAspNetCoreApp.Web.Filters
 
             if (hasProduct==false)
             {
-                context.Result = new RedirectToActionResult("Error","Home",null);
+                context.Result = new RedirectToActionResult("Error","Home",new ErrorViewModel() { Errors = new List<string>(){$"Id({id})' ye sahip ürün veritabanında bulunamamıştır."} });
             }
         }
     }
