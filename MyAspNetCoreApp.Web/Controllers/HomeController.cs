@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using MyAspNetCoreApp.Web.Filters;
 using MyAspNetCoreApp.Web.Models;
 using MyAspNetCoreApp.Web.ViewModels;
 using System.Diagnostics;
 
 namespace MyAspNetCoreApp.Web.Controllers
 {
+    [LogFilter]
     [Route("[controller]/[action]")]
     public class HomeController : Controller
     {
