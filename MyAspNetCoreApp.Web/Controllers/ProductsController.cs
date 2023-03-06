@@ -38,7 +38,7 @@ namespace MyAspNetCoreApp.Web.Controllers
         }
 
 
-        [CacheResourceFilter]
+        //[CacheResourceFilter]
         public IActionResult Index()
         {
 
@@ -118,12 +118,18 @@ namespace MyAspNetCoreApp.Web.Controllers
                 {
                     var root = _fileProvider.GetDirectoryContents("wwwroot");
                     var images = root.First(x=>x.Name=="images");
+
+                    var randomImageName = Guid.NewGuid() + Path.GetExtension(newProduct.Image.FileName);
+
                     var path = Path.Combine(images.PhysicalPath, newProduct.Image.FileName);
 
                     using var stream = new FileStream(path, FileMode.Create);
                     newProduct.Image.CopyTo(stream);
-                   
-                    _context.Products.Add(_mapper.Map<Product>(newProduct));
+
+                    var product = _mapper.Map<Product>(newProduct);
+                    product.ImagePath = randomImageName;
+
+                    _context.Products.Add(product);
                     _context.SaveChanges();
 
                     TempData["status"] = "Added successfully!";

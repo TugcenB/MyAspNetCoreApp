@@ -33,5 +33,8 @@ namespace MyAspNetCoreApp.Web.ViewModels
         public int? Expire { get; set; }
 
         public IFormFile Image { get; set; }
+
+        [ValidateNever]
+        public string ImagePath { get; set; }
     }
 }
