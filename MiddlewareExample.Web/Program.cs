@@ -16,27 +16,37 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.Use(async (context, next)=>
+#region Use() ve Run() kullanýmý
+//app.Use(async (context, next)=>
+//{
+//    await context.Response.WriteAsync("Before 1. Middleware\n");
+
+//    await next();
+
+//    await context.Response.WriteAsync("After 1. Middleware\n");
+//});
+
+//app.Use(async (context, next) =>
+//{
+//    await context.Response.WriteAsync("Before 2. Middleware\n");
+
+//    await next();
+
+//    await context.Response.WriteAsync("After 2. Middleware\n");
+//});
+
+//app.Run(async context =>
+//{
+//    await context.Response.WriteAsync("Terminal 3. Middleware\n");
+//}); 
+#endregion
+
+app.Map("/ornek", app =>
 {
-    await context.Response.WriteAsync("Before 1. Middleware\n");
-
-    await next();
-
-    await context.Response.WriteAsync("After 1. Middleware\n");
-});
-
-app.Use(async (context, next) =>
-{
-    await context.Response.WriteAsync("Before 2. Middleware\n");
-
-    await next();
-
-    await context.Response.WriteAsync("After 2. Middleware\n");
-});
-
-app.Run(async context =>
-{
-    await context.Response.WriteAsync("Terminal 3. Middleware\n");
+    app.Run(async context =>
+    {
+        await context.Response.WriteAsync("Ornek url'i icin middleware");
+    });
 });
 
 app.UseRouting();
