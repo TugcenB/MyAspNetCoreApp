@@ -51,24 +51,26 @@ app.UseStaticFiles();
 //}); 
 #endregion
 
-app.MapWhen(context => context.Request.Query.ContainsKey("name"), app =>
-{
+#region MapWhen() kullanýmý
+//app.MapWhen(context => context.Request.Query.ContainsKey("name"), app =>
+//{
 
-    app.Use(async (context, next) =>
-    {
-        await context.Response.WriteAsync("Before 1. Middleware\n");
+//    app.Use(async (context, next) =>
+//    {
+//        await context.Response.WriteAsync("Before 1. Middleware\n");
 
-        await next();
+//        await next();
 
-        await context.Response.WriteAsync("After 1. Middleware\n");
-    });
+//        await context.Response.WriteAsync("After 1. Middleware\n");
+//    });
 
-    app.Run(async context =>
-    {
-        await context.Response.WriteAsync("Terminal 3. Middleware\n");
-    });
+//    app.Run(async context =>
+//    {
+//        await context.Response.WriteAsync("Terminal 3. Middleware\n");
+//    });
 
-});
+//}); 
+#endregion
 
 app.UseRouting();
 
