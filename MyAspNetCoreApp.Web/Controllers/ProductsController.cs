@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.FileProviders;
 using MyAspNetCoreApp.Web.Filters;
 using MyAspNetCoreApp.Web.Helpers;
 using MyAspNetCoreApp.Web.Models;
@@ -17,8 +18,9 @@ namespace MyAspNetCoreApp.Web.Controllers
         private AppDbContext _context;
         private readonly ProductRepository _productRepository;
         private readonly IMapper _mapper;
+        private readonly IFileProvider _fileProvider;
 
-        public ProductsController(AppDbContext context, IMapper mapper)
+        public ProductsController(AppDbContext context, IMapper mapper, IFileProvider fileProvider)
         {
             _productRepository = new ProductRepository();
             _context = context;
@@ -32,6 +34,7 @@ namespace MyAspNetCoreApp.Web.Controllers
                 _context.SaveChanges();
             }
             _mapper = mapper;
+            _fileProvider = fileProvider;
         }
 
 
