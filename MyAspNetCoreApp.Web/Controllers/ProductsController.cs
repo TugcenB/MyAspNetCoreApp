@@ -121,7 +121,7 @@ namespace MyAspNetCoreApp.Web.Controllers
 
                     var randomImageName = Guid.NewGuid() + Path.GetExtension(newProduct.Image.FileName);
 
-                    var path = Path.Combine(images.PhysicalPath, newProduct.Image.FileName);
+                    var path = Path.Combine(images.PhysicalPath, randomImageName);
 
                     using var stream = new FileStream(path, FileMode.Create);
                     newProduct.Image.CopyTo(stream);
