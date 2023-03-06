@@ -109,30 +109,19 @@ namespace MyAspNetCoreApp.Web.Controllers
         [HttpPost]
         public IActionResult Add(ProductViewModel newProduct)
         {
-             ViewBag.Expire = new Dictionary<string, int>()
-            {
-                {"1 Ay",1},
-                {"3 Ay",3},
-                {"6 Ay",6},
-                {"12 Ay",12}
-            };
-
-                ViewBag.ColorSelect = new SelectList(new List<ColorSelectList> {
-                new(){Data="Blue",Value="Blue"},
-                new(){Data="Green",Value="Green"},
-                new(){Data="Red",Value="Red"}
-            }, "Value", "Data");
-                
-
-            //if (string.IsNullOrEmpty(newProduct.Name) && newProduct.Name.StartsWith("A"))
-            //{
-            //    ModelState.AddModelError(string.Empty,"Ürün A harfi ile başlayamaz!");
-            //}
+            IActionResult result = null;
+            
 
             if (ModelState.IsValid)
             {
                 try
                 {
+                    var root = _fileProvider.GetDirectoryContents("wwwroot");
+                    var images = root.First(x=>x.Name=="images");
+                    var path = Path.Combine(images.PhysicalPath, newProduct.Image.FileName);
+
+                    using var stream = new FileStream(path, FileMode.Create);
+                    newProduct.Image.CopyTo(stream);
                    
                     _context.Products.Add(_mapper.Map<Product>(newProduct));
                     _context.SaveChanges();
@@ -144,7 +133,8 @@ namespace MyAspNetCoreApp.Web.Controllers
                 {
 
                     ModelState.AddModelError(String.Empty,"Ürün kaydedilirken bir hata meydana geldi. Lütfen daha sonra tekrar deneyiniz. ");
-                    return View();
+
+                    result =  View();
 
                 }
                 
@@ -152,8 +142,24 @@ namespace MyAspNetCoreApp.Web.Controllers
 
             else
             {
-                return View();
+                result = View();
             }
+
+            ViewBag.Expire = new Dictionary<string, int>()
+            {
+                {"1 Ay",1},
+                {"3 Ay",3},
+                {"6 Ay",6},
+                {"12 Ay",12}
+            };
+
+            ViewBag.ColorSelect = new SelectList(new List<ColorSelectList> {
+                new(){Data="Blue",Value="Blue"},
+                new(){Data="Green",Value="Green"},
+                new(){Data="Red",Value="Red"}
+            }, "Value", "Data");
+
+            return result;
         }
 
         [ServiceFilter(typeof(NotFoundFilter))]
