@@ -14,6 +14,6 @@ namespace MyAspNetCoreApp.Web.Models
         public string? Color { get; set; }
         public bool IsPublish { get; set; }
         public int Expire { get; set; }
-        public string ImagePath { get; set; }
+        public string? ImagePath { get; set; }
     }
 }

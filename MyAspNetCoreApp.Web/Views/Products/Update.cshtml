@@ -2,7 +2,7 @@
     ViewData["Title"] = "Update";
 }
 
-@model ProductViewModel
+@model ProductUpdateViewModel
 
 <h1>Update Product</h1>
 <form asp-controller="Products" asp-action="Update" asp-route-productId="@Model.Id" method="post" enctype="multipart/form-data">
@@ -10,7 +10,7 @@
     <input type="hidden" asp-for="ImagePath" />
 
     <div>
-        <img style="width:100px; height:100px;" src="@(String.IsNullOrEmpty(Model.ImagePath) ? "/images/noimage.jpg" : "/images/"+Model.ImagePath )" />
+        <img style="width:100px; height:100px;" src="@(String.IsNullOrEmpty(Model.ImagePath) ? "/images/noimages.jpeg" : "/images/"+Model.ImagePath )" />
 
 
     </div>

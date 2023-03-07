@@ -10,6 +10,7 @@ namespace MyAspNetCoreApp.Web.Mapping
         {
             CreateMap<Product,ProductViewModel>().ReverseMap();
             CreateMap<Visitor,VisitorViewModel>().ReverseMap();
+            CreateMap<Product, ProductUpdateViewModel>().ReverseMap();
         }
     }
 }
