@@ -15,5 +15,8 @@ namespace MyAspNetCoreApp.Web.Models
         public bool IsPublish { get; set; }
         public int Expire { get; set; }
         public string? ImagePath { get; set; }
+        public Category Category { get; set; }
+        public int CategoryId { get; set; } //foreign key
+
     }
 }
