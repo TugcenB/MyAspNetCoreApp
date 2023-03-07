@@ -5,9 +5,15 @@
 @model ProductViewModel
 
 <h1>Update Product</h1>
-<form asp-controller="Products" asp-action="Update" asp-route-productId="@Model.Id" method="post">
-
+<form asp-controller="Products" asp-action="Update" asp-route-productId="@Model.Id" method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="ImagePath" />
+
+    <div>
+        <img style="width:100px; height:100px;" src="@(String.IsNullOrEmpty(Model.ImagePath) ? "/images/noimage.jpg" : "/images/"+Model.ImagePath )" />
+
+
+    </div>
     <div class="mb-3">
         <label asp-for="Name" class="form-label">Product Name</label>
         <span class="text-danger" asp-validation-for="Name"></span>
@@ -65,7 +71,11 @@
         <span class="text-danger" asp-validation-for="PublishDate"></span>
         <input class="form-control" asp-for="PublishDate">
     </div>
+    <div class="mb-3">
+        <label for="formFileLg" class="form-label">Ürün Resim</label>
+        <input class="form-control form-control-lg" asp-for="Image" type="file">
 
+    </div>
     <button class="btn btn-primary" type="submit">Update</button>
 </form>
 

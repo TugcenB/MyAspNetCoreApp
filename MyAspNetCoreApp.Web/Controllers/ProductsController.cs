@@ -116,18 +116,27 @@ namespace MyAspNetCoreApp.Web.Controllers
             {
                 try
                 {
-                    var root = _fileProvider.GetDirectoryContents("wwwroot");
-                    var images = root.First(x=>x.Name=="images");
-
-                    var randomImageName = Guid.NewGuid() + Path.GetExtension(newProduct.Image.FileName);
-
-                    var path = Path.Combine(images.PhysicalPath, randomImageName);
-
-                    using var stream = new FileStream(path, FileMode.Create);
-                    newProduct.Image.CopyTo(stream);
-
                     var product = _mapper.Map<Product>(newProduct);
-                    product.ImagePath = randomImageName;
+
+                    if (newProduct.Image!=null && newProduct.Image.Length > 0)
+                    {
+                        var root = _fileProvider.GetDirectoryContents("wwwroot");
+
+                        var images = root.First(x => x.Name == "images");
+
+                        var randomImageName = Guid.NewGuid() + Path.GetExtension(newProduct.Image.FileName);
+
+                        var path = Path.Combine(images.PhysicalPath, randomImageName);
+
+                        using var stream = new FileStream(path, FileMode.Create);
+
+                        newProduct.Image.CopyTo(stream);
+
+                        product.ImagePath = randomImageName;
+                    }
+                    
+
+                    
 
                     _context.Products.Add(product);
                     _context.SaveChanges();
