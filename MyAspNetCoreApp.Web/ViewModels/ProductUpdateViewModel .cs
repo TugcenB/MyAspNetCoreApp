@@ -12,8 +12,7 @@ namespace MyAspNetCoreApp.Web.ViewModels
         [StringLength(50, MinimumLength = 10, ErrorMessage = "Karakter uzunluğu 10-50 aralığında olmalıdır.")]
         public string? Name { get; set; } = null!;
 
-        //[RegularExpression(@"^[0-9]+(\.[0-9]{1,2})", ErrorMessage = "Fiyat alanınıda noktadan sonra en fazla 2 basamak olmalıdır.")]
-        [Required(ErrorMessage = "Price alanı boş olamaz")]
+        
         public decimal? Price { get; set; }
 
         [Required(ErrorMessage = "Stok alanı boş olamaz")]
