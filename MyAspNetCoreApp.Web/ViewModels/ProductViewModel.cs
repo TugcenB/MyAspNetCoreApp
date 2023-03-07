@@ -37,5 +37,8 @@ namespace MyAspNetCoreApp.Web.ViewModels
 
         [ValidateNever]
         public string ImagePath { get; set; }
+
+        [Required(ErrorMessage ="Please, choose a category!")]
+        public int CategoryId { get; set; }
     }
 }

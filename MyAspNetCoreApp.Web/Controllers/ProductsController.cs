@@ -25,14 +25,14 @@ namespace MyAspNetCoreApp.Web.Controllers
             _productRepository = new ProductRepository();
             _context = context;
 
-            if (!_context.Products.Any())
-            {
-                _context.Products.Add(new Product() { Name = "Kalem 1", Stock = 10, Price = 100, Color = "Red" });
-                _context.Products.Add(new Product() { Name = "Kalem 2", Stock = 10, Price = 200, Color = "White" });
-                _context.Products.Add(new Product() { Name = "Kalem 3", Stock = 10, Price = 300, Color = "Red" });
+            //if (!_context.Products.Any())
+            //{
+            //    _context.Products.Add(new Product() { Name = "Kalem 1", Stock = 10, Price = 100, Color = "Red" });
+            //    _context.Products.Add(new Product() { Name = "Kalem 2", Stock = 10, Price = 200, Color = "White" });
+            //    _context.Products.Add(new Product() { Name = "Kalem 3", Stock = 10, Price = 300, Color = "Red" });
 
-                _context.SaveChanges();
-            }
+            //    _context.SaveChanges();
+            //}
             _mapper = mapper;
             _fileProvider = fileProvider;
         }
@@ -99,9 +99,10 @@ namespace MyAspNetCoreApp.Web.Controllers
                 new(){Data="Green",Value="Green"},
                 new(){Data="Red",Value="Red"}
             }, "Value", "Data");
-            
 
+            var categories = _context.Category.ToList();
 
+            ViewBag.CategorySelect = new SelectList(categories, "Id", "Name");
 
             return View();
         }
