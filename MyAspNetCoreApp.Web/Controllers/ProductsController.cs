@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using MyAspNetCoreApp.Web.Filters;
 using MyAspNetCoreApp.Web.Helpers;
@@ -41,20 +42,33 @@ namespace MyAspNetCoreApp.Web.Controllers
         //[CacheResourceFilter]
         public IActionResult Index()
         {
+            List<ProductViewModel> products = _context.Products.Include(x => x.Category).Select(x => new ProductViewModel()
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Description = x.Description,
+                CategoryId = x.CategoryId,
+                Stock = x.Stock,
+                Color = x.Color,
+                CategoryName = x.Category.Name,
+                Expire = x.Expire,
+                ImagePath = x.ImagePath,
+                IsPublish = x.IsPublish,
+                Price = x.Price,
+                PublishDate = x.PublishDate
+            }).ToList();
 
-            var products = _context.Products.ToList();
-
-            return View(_mapper.Map<List<ProductViewModel>>(products));
+            return View(products);
         }
 
 
         //[HttpGet("{page}/{pageSize}")]
 
-        [Route("[controller]/[action]/{page}/{pageSize}", Name ="productpage")]
-        public IActionResult Pages(int page,int pageSize)
+        [Route("[controller]/[action]/{page}/{pageSize}", Name = "productpage")]
+        public IActionResult Pages(int page, int pageSize)
         {
-            var products = _context.Products.Skip((page-1)*pageSize).Take(pageSize).ToList();
-            
+            var products = _context.Products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
             ViewBag.page = page;
             ViewBag.pageSize = pageSize;
 
@@ -62,7 +76,7 @@ namespace MyAspNetCoreApp.Web.Controllers
         }
 
         [ServiceFilter(typeof(NotFoundFilter))]
-        [Route("[controller]/[action]/{productId}", Name ="product")]
+        [Route("[controller]/[action]/{productId}", Name = "product")]
         public IActionResult GetById(int productId)
         {
             var product = _context.Products.Find(productId);
@@ -85,8 +99,8 @@ namespace MyAspNetCoreApp.Web.Controllers
 
         [HttpGet]
         public IActionResult Add()
-        { 
-                ViewBag.Expire = new Dictionary<string, int>()
+        {
+            ViewBag.Expire = new Dictionary<string, int>()
             {
                 {"1 Ay",1},
                 {"3 Ay",3},
@@ -94,7 +108,7 @@ namespace MyAspNetCoreApp.Web.Controllers
                 {"12 Ay",12}
             };
 
-                ViewBag.ColorSelect = new SelectList(new List<ColorSelectList> {
+            ViewBag.ColorSelect = new SelectList(new List<ColorSelectList> {
                 new(){Data="Blue",Value="Blue"},
                 new(){Data="Green",Value="Green"},
                 new(){Data="Red",Value="Red"}
@@ -111,7 +125,7 @@ namespace MyAspNetCoreApp.Web.Controllers
         public IActionResult Add(ProductViewModel newProduct)
         {
             IActionResult result = null;
-            
+
 
             if (ModelState.IsValid)
             {
@@ -119,7 +133,7 @@ namespace MyAspNetCoreApp.Web.Controllers
                 {
                     var product = _mapper.Map<Product>(newProduct);
 
-                    if (newProduct.Image!=null && newProduct.Image.Length > 0)
+                    if (newProduct.Image != null && newProduct.Image.Length > 0)
                     {
                         var root = _fileProvider.GetDirectoryContents("wwwroot");
 
@@ -135,9 +149,9 @@ namespace MyAspNetCoreApp.Web.Controllers
 
                         product.ImagePath = randomImageName;
                     }
-                    
 
-                    
+
+
 
                     _context.Products.Add(product);
                     _context.SaveChanges();
@@ -148,12 +162,12 @@ namespace MyAspNetCoreApp.Web.Controllers
                 catch (Exception)
                 {
 
-                    ModelState.AddModelError(String.Empty,"Ürün kaydedilirken bir hata meydana geldi. Lütfen daha sonra tekrar deneyiniz. ");
+                    ModelState.AddModelError(String.Empty, "Ürün kaydedilirken bir hata meydana geldi. Lütfen daha sonra tekrar deneyiniz. ");
 
-                    result =  View();
+                    result = View();
 
                 }
-                
+
             }
 
             else
@@ -206,7 +220,7 @@ namespace MyAspNetCoreApp.Web.Controllers
         [HttpPost]
         public IActionResult Update(ProductUpdateViewModel updateProduct)
         {
- 
+
             if (!ModelState.IsValid)
             {
                 ViewBag.ExpireValue = updateProduct.Expire;
@@ -252,8 +266,8 @@ namespace MyAspNetCoreApp.Web.Controllers
         }
 
 
-        [AcceptVerbs("GET","POST")]
-        public IActionResult HasProductName(string Name) 
+        [AcceptVerbs("GET", "POST")]
+        public IActionResult HasProductName(string Name)
         {
             var anyProducts = _context.Products.Any(x => x.Name.ToLower() == Name.ToLower());
 

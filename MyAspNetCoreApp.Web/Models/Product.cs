@@ -17,6 +17,5 @@ namespace MyAspNetCoreApp.Web.Models
         public string? ImagePath { get; set; }
         public Category Category { get; set; }
         public int CategoryId { get; set; } //foreign key
-
     }
 }
