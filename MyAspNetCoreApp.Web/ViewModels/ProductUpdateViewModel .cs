@@ -8,6 +8,8 @@ namespace MyAspNetCoreApp.Web.ViewModels
     {
         public int Id { get; set; }
 
+        public int CategoryId { get; set; }
+
         [Required(ErrorMessage = "İsim alanı boş olamaz")]
         [StringLength(50, MinimumLength = 10, ErrorMessage = "Karakter uzunluğu 10-50 aralığında olmalıdır.")]
         public string? Name { get; set; } = null!;
