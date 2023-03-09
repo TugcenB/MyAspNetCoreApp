@@ -57,10 +57,10 @@ app.UseAuthorization();
 //    name: "getbyid",
 //    pattern: "{controller}/{action}/{productid}");
 
-app.MapControllers();
+//app.MapControllers();
 
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

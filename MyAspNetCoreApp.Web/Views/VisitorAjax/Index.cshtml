@@ -2,21 +2,47 @@
     ViewData["Title"] = "Index";
 }
 
-@section Scripts{
 
+@section Scripts
+    {
     <script type="text/javascript">
 
+        $(document).ready(function () {
+            $("#btnSave").click(function () {
+                var name = $("#Name").val();
+                var comment = $("#Comment").val();
+                var jsonData = { "name": name, "comment": comment };
+                $.ajax({
+                    type: "POST",
+                    url: "/VisitorAjax/SaveVisitorComment",
+                    data: jsonData,
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (error) {
+
+                        console.log(error);
+                    }
+                })
+            })
+        })
     </script>
+
 }
 
 <div class="mb-3">
-    <label for="Name" class="form-label">Name</label>
+    <label for="Name" class="form-label">İsim</label>
     <input class="form-control" id="Name" name="Name">
+
 </div>
 
 <div class="form-floating mb-3">
-    <textarea id="Comment" name="Comment" class="form-control" placeholder="Comment"></textarea>
-    <label for="Comment">Comment</label>
+    <textarea id="Comment" name="Comment" class="form-control" placeholder="Yorum" style="height: 100px"></textarea>
+    <label for="Comment">Yorum</label>
 </div>
 
-<button type="button" class="btn btn-primary">Submit</button>
+
+
+
+
+<button id="btnSave" type="button" class="btn btn-primary">Kaydet</button>

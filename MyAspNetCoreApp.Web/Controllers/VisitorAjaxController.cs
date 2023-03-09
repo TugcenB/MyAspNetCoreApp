@@ -6,6 +6,7 @@ using MyAspNetCoreApp.Web.ViewModels;
 
 namespace MyAspNetCoreApp.Web.Controllers
 {
+   
     public class VisitorAjaxController : Controller
     {
         private readonly IMapper _mapper;
