@@ -8,7 +8,42 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+
+            function loadComment() {
+                $.ajax({
+                    type: "GET",
+                    url: "/VisitorAjax/VisitorCommentList",
+                    data: jsonData,
+                    success: function (data) {
+                        console.log(data);
+
+                        $each(data, function (index, item) {
+
+                            let item = ´<div class="mt-3" >
+                                <div class="card" >
+                                    <div class="card-body" >
+                                        <h5 class="card-title" > ${ item.name } </h5>
+                                            < h6 class="card-subtitle mb-2 text-muted" > ${ item.created } </h6>
+                                                < p class="card-text" > ${ item.comment } </p>
+                                                    < /div>
+                                                    < /div>
+                                                    < /div>´;
+                            $("#comments").append(item);
+                        })
+                    },
+                    error: function (e) {
+
+                        console.log(e);
+                    }
+                })
+            }
+
+            loadComments();
             $("#btnSave").click(function () {
+
+                
+
+
                 var name = $("#Name").val();
                 var comment = $("#Comment").val();
                 var jsonData = { "name": name, "comment": comment };
@@ -29,6 +64,8 @@
     </script>
 
 }
+<div id="comments">
+</div>
 
 <div class="mb-3">
     <label for="Name" class="form-label">İsim</label>
